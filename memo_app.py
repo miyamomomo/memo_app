@@ -17,7 +17,7 @@ class Post(db.Model):
     title = db.Column(db.Text())
     content = db.Column(db.Text())
 
-
+#メモアプリ表示
 @app.route('/')
 def list():
 
@@ -26,7 +26,7 @@ def list():
 
     return render_template('list.html', message = message, posts = posts)
 
-
+#詳細メモ表示
 @app.route('/show/<int:id>')
 def show_post(id):
 
@@ -35,14 +35,14 @@ def show_post(id):
 
     return render_template('show.html', message = message, post = post)
 
-
+#新規メモ
 @app.route('/new')
 def new_post():
 
     message = 'New memo'
     return render_template('new.html', message = message)
 
-
+#新規メモ作成
 @app.route('/create', methods=['POST'])
 def create_post():
 
@@ -58,7 +58,7 @@ def create_post():
 
     return render_template('show.html', message = message, post = post)
 
-
+#メモ削除
 @app.route('/destroy/<int:id>')
 def destroy_post(id):
 
@@ -71,14 +71,14 @@ def destroy_post(id):
     posts = Post.query.all()
 
     return render_template('list.html', message = message, posts = posts)
-
+#メモ編集画面
 @app.route('/edit/<int:id>')
 def edit_post(id):
 
     message = 'Edit memo'+str(id)
     post=Post.query.get(id)
     return render_template('edit.html', message = message,post=post)
-    
+#メモ編集
 @app.route('/update/<int:id>', methods=['POST'])
 def update_post(id):
 
